@@ -1,0 +1,17 @@
+# Use uma imagem oficial do Python como parent image
+FROM python:3.9
+
+# Define o diretório de trabalho dentro do contêiner
+
+# Copia os arquivos de requisitos e instala as dependências
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia o resto do seu código para o contêiner
+COPY . .
+
+# Informa que a porta 8000 precisa estar acessível
+EXPOSE 8000
+
+# Comando para rodar a aplicação
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
